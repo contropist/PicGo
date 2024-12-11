@@ -1,4 +1,7 @@
 // global
+
+type FN = (...args: any) => any
+
 interface IObj {
   [propName: string]: any
 }
@@ -162,7 +165,17 @@ interface IPicGoPluginConfig {
     name?: string
     value?: any
   }[]
+  /** support markdown */
+  tips?: string
   [propName: string]: any
+}
+
+interface IPicGoPluginShowConfigDialogOption {
+  title: string
+  config: IPicGoPluginConfig[]
+  tips?: string
+  confirmText?: string
+  cancelText?: string
 }
 
 interface IPicGoPluginOriginConfig {
@@ -200,9 +213,10 @@ interface INPMSearchResultObject {
     version: string
     description: string
     keywords: string[]
-    author: {
-      name: string
-    }
+    maintainers: Array<{
+      email: string
+      username: string
+    }>
     links: {
       npm: string
       homepage: string
@@ -219,6 +233,8 @@ interface IGuiApi {
   upload: (input: IUploadOption) => Promise<ImgInfo[]>
   showNotification: (options?: IShowNotificationOption) => void
   showMessageBox: (options?: IShowMessageBoxOption) => Promise<IShowMessageBoxResult>
+  showConfigDialog: <T extends IStringKeyMap>(options: IPicGoPluginShowConfigDialogOption) => Promise<T | false>
+  galleryDB: import('@picgo/store').DBStore
 }
 interface IShowInputBoxOption {
   value?: string
@@ -430,4 +446,4 @@ interface IUploaderConfigItem {
 
 type IUploaderConfigListItem = IStringKeyMap & IUploaderListItemMetaInfo
 
-type ICheckBoxValueType = boolean | string | number
+type ISwitchValueType = boolean | string | number

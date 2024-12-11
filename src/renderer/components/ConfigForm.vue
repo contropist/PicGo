@@ -3,81 +3,35 @@
     id="config-form"
     :class="props.colorMode === 'white' ? 'white' : ''"
   >
-    <el-form
+    <BaseConfigForm
       ref="$form"
-      label-position="left"
-      label-width="50%"
-      :model="ruleForm"
-      size="small"
+      :config="configList"
+      :form-model="formModel"
     >
-      <el-form-item
-        :label="$T('UPLOADER_CONFIG_NAME')"
-        required
-        prop="_configName"
-      >
-        <el-input
-          v-model="ruleForm._configName"
-          type="input"
-          :placeholder="$T('UPLOADER_CONFIG_PLACEHOLDER')"
-        />
-      </el-form-item>
-      <!-- dynamic config -->
-      <el-form-item
-        v-for="(item, index) in configList"
-        :key="item.name + index"
-        :label="item.alias || item.name"
-        :required="item.required"
-        :prop="item.name"
-      >
-        <el-input
-          v-if="item.type === 'input' || item.type === 'password'"
-          v-model="ruleForm[item.name]"
-          :type="item.type === 'password' ? 'password' : 'input'"
-          :placeholder="item.message || item.name"
-        />
-        <el-select
-          v-else-if="item.type === 'list' && item.choices"
-          v-model="ruleForm[item.name]"
-          :placeholder="item.message || item.name"
+      <template #extra-form>
+        <el-form-item
+          v-if="isUploader"
+          :label="$T('UPLOADER_CONFIG_NAME')"
+          required
+          prop="_configName"
         >
-          <el-option
-            v-for="choice in item.choices"
-            :key="choice.name || choice.value || choice"
-            :label="choice.name || choice.value || choice"
-            :value="choice.value || choice"
+          <el-input
+            v-model="formModel._configName"
+            type="input"
+            :placeholder="$T('UPLOADER_CONFIG_PLACEHOLDER')"
           />
-        </el-select>
-        <el-select
-          v-else-if="item.type === 'checkbox' && item.choices"
-          v-model="ruleForm[item.name]"
-          :placeholder="item.message || item.name"
-          multiple
-          collapse-tags
-        >
-          <el-option
-            v-for="choice in item.choices"
-            :key="choice.value || choice"
-            :label="choice.name || choice.value || choice"
-            :value="choice.value || choice"
-          />
-        </el-select>
-        <el-switch
-          v-else-if="item.type === 'confirm'"
-          v-model="ruleForm[item.name]"
-          active-text="yes"
-          inactive-text="no"
-        />
-      </el-form-item>
+        </el-form-item>
+      </template>
       <slot />
-    </el-form>
+    </BaseConfigForm>
   </div>
 </template>
 <script lang="ts" setup>
 import { reactive, ref, watch, toRefs } from 'vue'
-import { cloneDeep, union } from 'lodash'
 import { getConfig } from '@/utils/dataSender'
 import { useRoute } from 'vue-router'
-import type { FormInstance } from 'element-plus'
+import BaseConfigForm from './form/BaseConfigForm.vue'
+import { useConfigForm } from '@/hooks/useConfigForm'
 
 interface IProps {
   config: any[]
@@ -88,33 +42,14 @@ interface IProps {
 
 const props = defineProps<IProps>()
 const $route = useRoute()
-const $form = ref<FormInstance>()
-
+const $form = ref<IFormInstance>()
 const configList = ref<IPicGoPluginConfig[]>([])
-const ruleForm = reactive<IStringKeyMap>({})
-
-watch(toRefs(props.config), (val: IPicGoPluginConfig[]) => {
-  handleConfigChange(val)
-}, {
-  deep: true,
-  immediate: true
-})
-
-function handleConfigChange (val: any) {
-  handleConfig(val)
-}
+const formModel = reactive<IStringKeyMap>({})
+const isUploader = props.type === 'uploader'
 
 async function validate (): Promise<IStringKeyMap | false> {
-  return new Promise((resolve) => {
-    $form.value?.validate((valid: boolean) => {
-      if (valid) {
-        resolve(ruleForm)
-      } else {
-        resolve(false)
-        return false
-      }
-    })
-  })
+  const res = await $form.value?.validate() || false
+  return res
 }
 
 function getConfigType () {
@@ -133,45 +68,50 @@ function getConfigType () {
   }
 }
 
-async function handleConfig (val: IPicGoPluginConfig[]) {
-  const config = await getCurConfigFormData()
-  const configId = $route.params.configId
-  Object.assign(ruleForm, config)
-  if (val.length > 0) {
-    configList.value = cloneDeep(val).map((item) => {
-      if (!configId) return item
-      let defaultValue = item.default !== undefined
-        ? item.default
-        : item.type === 'checkbox'
-          ? []
-          : null
-      if (item.type === 'checkbox') {
-        const defaults = item.choices?.filter((i: any) => {
-          return i.checked
-        }).map((i: any) => i.value) || []
-        defaultValue = union(defaultValue, defaults)
-      }
-      if (config && config[item.name] !== undefined) {
-        defaultValue = config[item.name]
-      }
-      ruleForm[item.name] = defaultValue
-      return item
-    })
-  }
+const handleConfigForm = useConfigForm()
+
+async function handleConfig (inputConfig: IPicGoPluginConfig[]) {
+  const currentConfig = await getCurConfigFormData()
+  const resetConfig = isUploader && !$route.params.configId
+  Object.assign(formModel, currentConfig)
+  configList.value = handleConfigForm(inputConfig, formModel, currentConfig, resetConfig)
 }
 
 async function getCurConfigFormData () {
   const configId = $route.params.configId
-  const curTypeConfigList = await getConfig<IStringKeyMap[]>(`uploader.${props.id}.configList`) || []
-  return curTypeConfigList.find(i => i._id === configId) || {}
+  const configType = getConfigType()
+  if (isUploader) {
+    const curTypeConfigList = await getConfig<IStringKeyMap[]>(`uploader.${props.id}.configList`) || []
+    return curTypeConfigList.find(i => i._id === configId) || {}
+  } else {
+    const config = await getConfig<IStringKeyMap>(configType)
+    return config || {}
+  }
 }
+
+async function resetConfig () {
+  const config = await getCurConfigFormData()
+  Object.assign(formModel, config)
+}
+
+watch(toRefs(props.config), (val: IPicGoPluginConfig[]) => {
+  handleConfig(val)
+}, {
+  deep: true,
+  immediate: true
+})
 
 defineExpose({
   validate,
-  getConfigType
+  getConfigType,
+  resetConfig
 })
 </script>
 <style lang='stylus'>
+.config-form-common-tips
+  a
+    color #409EFF
+    text-decoration none
 #config-form
   .el-form
     label

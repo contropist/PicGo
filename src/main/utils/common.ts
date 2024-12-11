@@ -1,9 +1,10 @@
 import fs from 'fs-extra'
 import db from '~/main/apis/core/datastore'
 import { clipboard, Notification, dialog } from 'electron'
+import { handleUrlEncode } from '~/universal/utils/common'
 
 export const handleCopyUrl = (str: string): void => {
-  if (db.get('settings.autoCopy') !== false) {
+  if (db.get('settings.autoCopyUrl') !== false) {
     clipboard.writeText(str)
   }
 }
@@ -116,4 +117,39 @@ export const getClipboardFilePath = (): string => {
     }
   }
   return ''
+}
+
+export const handleUrlEncodeWithSetting = (url: string) => {
+  if (db.get('settings.encodeOutputURL') === true) {
+    url = handleUrlEncode(url)
+  }
+  return url
+}
+
+export const replaceHost = (url: string, oldHost: string, newHost: string) => {
+  try {
+    const parsedUrl = new URL(url)
+    if (parsedUrl.host === oldHost) {
+      parsedUrl.host = newHost
+    }
+    return parsedUrl.toString()
+  } catch {
+    return url
+  }
+}
+
+export const getHost = (url: string = '') => {
+  try {
+    const parsedUrl = new URL(url)
+    return parsedUrl.host
+  } catch {
+    return ''
+  }
+}
+
+/**
+ * remove protocol and suffix
+ */
+export const removeProtocolAndSuffix = (url: string = '') => {
+  return url.replace(/^(https?:\/\/)?/, '').replace(/\/$/, '')
 }

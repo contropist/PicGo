@@ -70,7 +70,13 @@ export enum IRPCActionType {
   // system rpc
   RELOAD_APP = 'RELOAD_APP',
   OPEN_FILE = 'OPEN_FILE',
-  COPY_TEXT = 'COPY_TEXT'
+  COPY_TEXT = 'COPY_TEXT',
+  SHOW_DOCK_ICON = 'SHOW_DOCK_ICON',
+
+  // gallery and toolbox rpc
+  UPDATE_GALLERY = 'UPDATE_GALLERY',
+  GET_GALLERY_MENU_LIST = 'GET_GALLERY_MENU_LIST',
+  OPEN_CONFIG_DIALOG = 'OPEN_CONFIG_DIALOG',
 }
 
 export enum IToolboxItemType {
@@ -85,4 +91,10 @@ export enum IToolboxItemCheckStatus {
   LOADING = 'loading',
   SUCCESS = 'success',
   ERROR = 'error',
+}
+
+export enum IStartupMode {
+  SHOW_MAIN_WINDOW = 'SHOW_SETTING_WINDOW',
+  SHOW_MINI_WINDOW = 'SHOW_MINI_WINDOW',
+  HIDE = 'HIDE'
 }

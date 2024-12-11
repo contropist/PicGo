@@ -5,14 +5,14 @@ import {
   RENAME_WINDOW_URL,
   TOOLBOX_WINDOW_URL
 } from './constants'
-import { IRemoteNoticeTriggerHook, IWindowList } from '#/types/enum'
+import { IStartupMode, IWindowList } from '#/types/enum'
 import bus from '@core/bus'
 import { CREATE_APP_MENU } from '@core/bus/constants'
 import db from '~/main/apis/core/datastore'
 import { TOGGLE_SHORTKEY_MODIFIED_MODE } from '#/events/constants'
 import { app } from 'electron'
-import { remoteNoticeHandler } from '../remoteNotice'
 import { T } from '~/main/i18n'
+import { isLinux } from '~/universal/utils/common'
 // import { URLSearchParams } from 'url'
 
 const windowList = new Map<IWindowList, IWindowListItem>()
@@ -24,6 +24,21 @@ const handleWindowParams = (windowURL: string) => {
   // search.append('lang', lang)
   // return `${baseURL}?${search.toString()}#${hash}`
   return windowURL
+}
+
+export const isWindowShouldShowOnStartup = (currentWindow: IWindowList) => {
+  const startupMode = db.get('settings.startupMode') || (isLinux ? IStartupMode.SHOW_MINI_WINDOW : IStartupMode.HIDE)
+  switch (currentWindow) {
+    case IWindowList.MINI_WINDOW: {
+      return startupMode === IStartupMode.SHOW_MINI_WINDOW
+    }
+    case IWindowList.SETTING_WINDOW: {
+      return startupMode === IStartupMode.SHOW_MAIN_WINDOW
+    }
+    default: {
+      return false
+    }
+  }
 }
 
 windowList.set(IWindowList.TRAY_WINDOW, {
@@ -60,6 +75,7 @@ windowList.set(IWindowList.SETTING_WINDOW, {
   isValid: true,
   multiple: false,
   options () {
+    const showDockIcon = db.get('settings.showDockIcon') !== false
     const options: IBrowserWindowOptions = {
       height: 450,
       width: 800,
@@ -71,6 +87,7 @@ windowList.set(IWindowList.SETTING_WINDOW, {
       title: 'PicGo',
       vibrancy: 'ultra-dark',
       transparent: true,
+      skipTaskbar: !showDockIcon,
       titleBarStyle: 'hidden',
       webPreferences: {
         backgroundThrottling: false,
@@ -86,13 +103,11 @@ windowList.set(IWindowList.SETTING_WINDOW, {
       options.backgroundColor = '#3f3c37'
       options.transparent = false
       options.icon = `${__static}/logo.png`
+      options.skipTaskbar = false
     }
     return options
   },
   callback (window, windowManager) {
-    window.once('show', () => {
-      remoteNoticeHandler.triggerHook(IRemoteNoticeTriggerHook.SETTING_WINDOW_OPEN)
-    })
     window.loadURL(handleWindowParams(SETTING_WINDOW_URL))
     window.on('closed', () => {
       bus.emit(TOGGLE_SHORTKEY_MODIFIED_MODE, false)
@@ -114,7 +129,7 @@ windowList.set(IWindowList.MINI_WINDOW, {
     const obj: IBrowserWindowOptions = {
       height: 64,
       width: 64,
-      show: process.platform === 'linux',
+      show: isLinux,
       frame: false,
       fullscreenable: false,
       skipTaskbar: true,
@@ -129,7 +144,7 @@ windowList.set(IWindowList.MINI_WINDOW, {
       }
     }
 
-    if (db.get('settings.miniWindowOntop')) {
+    if (db.get('settings.miniWindowOnTop')) {
       obj.alwaysOnTop = true
     }
     return obj

@@ -1,3 +1,130 @@
+# :tada: 2.4.0-beta.9 (2024-12-02)
+
+
+### :bug: Bug Fixes
+
+* clipboard filename missing second ([c9fe402](https://github.com/Molunerfinn/PicGo/commit/c9fe402)), closes [#1293](https://github.com/Molunerfinn/PicGo/issues/1293)
+* copy text bug ([c8ba547](https://github.com/Molunerfinn/PicGo/commit/c8ba547)), closes [#1210](https://github.com/Molunerfinn/PicGo/issues/1210) [#1280](https://github.com/Molunerfinn/PicGo/issues/1280)
+* plugin list search bug ([04140de](https://github.com/Molunerfinn/PicGo/commit/04140de)), closes [#1297](https://github.com/Molunerfinn/PicGo/issues/1297)
+
+
+### :package: Chore
+
+* update ci macos version ([316928e](https://github.com/Molunerfinn/PicGo/commit/316928e))
+
+
+
+# :tada: 2.4.0-beta.8 (2024-07-16)
+
+
+### :bug: Bug Fixes
+
+* tencent cos url encode bug ([ff7336b](https://github.com/Molunerfinn/PicGo/commit/ff7336b)), closes [#1265](https://github.com/Molunerfinn/PicGo/issues/1265)
+
+
+
+# :tada: 2.4.0-beta.7 (2024-04-22)
+
+
+### :sparkles: Features
+
+* add startup mode ([aaec99f](https://github.com/Molunerfinn/PicGo/commit/aaec99f)), closes [#915](https://github.com/Molunerfinn/PicGo/issues/915)
+
+
+### :bug: Bug Fixes
+
+* config page scroll bug ([8e91582](https://github.com/Molunerfinn/PicGo/commit/8e91582)), closes [#1237](https://github.com/Molunerfinn/PicGo/issues/1237)
+* tray menu open bug ([50e0a64](https://github.com/Molunerfinn/PicGo/commit/50e0a64)), closes [#1217](https://github.com/Molunerfinn/PicGo/issues/1217)
+
+
+
+# :tada: 2.4.0-beta.6 (2023-11-19)
+
+
+### :bug: Bug Fixes
+
+* app.asar directroy copy error ([#1180](https://github.com/Molunerfinn/PicGo/issues/1180)) ([cd07b33](https://github.com/Molunerfinn/PicGo/commit/cd07b33)), closes [#1179](https://github.com/Molunerfinn/PicGo/issues/1179)
+* can't add new config for picbed ([050a3dd](https://github.com/Molunerfinn/PicGo/commit/050a3dd)), closes [#1184](https://github.com/Molunerfinn/PicGo/issues/1184)
+
+
+
+# :tada: 2.4.0-beta.5 (2023-09-10)
+
+
+### :sparkles: Features
+
+* add gallery toolbox menu ([#1177](https://github.com/Molunerfinn/PicGo/issues/1177)) ([0f7b07d](https://github.com/Molunerfinn/PicGo/commit/0f7b07d))
+
+
+
+# :tada: 2.4.0-beta.4 (2023-08-26)
+
+
+### :sparkles: Features
+
+* add configName for upload page ([894d0a2](https://github.com/Molunerfinn/PicGo/commit/894d0a2))
+* support "tips" option for uploader ([1b92f20](https://github.com/Molunerfinn/PicGo/commit/1b92f20))
+* **tcyun:** add slim section ([#1165](https://github.com/Molunerfinn/PicGo/issues/1165)) ([a2320c3](https://github.com/Molunerfinn/PicGo/commit/a2320c3))
+
+
+### :bug: Bug Fixes
+
+* open config file bug ([2db0fea](https://github.com/Molunerfinn/PicGo/commit/2db0fea)), closes [#1163](https://github.com/Molunerfinn/PicGo/issues/1163)
+
+
+
+# :tada: 2.4.0-beta.3 (2023-07-09)
+
+
+### :bug: Bug Fixes
+
+* rename page bug ([bc2e928](https://github.com/Molunerfinn/PicGo/commit/bc2e928)), closes [#1130](https://github.com/Molunerfinn/PicGo/issues/1130)
+* tailwind css bug ([e3566b5](https://github.com/Molunerfinn/PicGo/commit/e3566b5))
+
+
+
+# :tada: 2.4.0-beta.2 (2023-07-09)
+
+
+### :bug: Bug Fixes
+
+* fileName encode bug ([8d9a400](https://github.com/Molunerfinn/PicGo/commit/8d9a400)), closes [#1121](https://github.com/Molunerfinn/PicGo/issues/1121)
+
+
+
+# :tada: 2.4.0-beta.1 (2023-05-03)
+
+
+### :sparkles: Features
+
+* add picgo toolbox for auto detect & fix problems ([dfbc96f](https://github.com/Molunerfinn/PicGo/commit/dfbc96f))
+* add settings.encodeOutputURL options ([f75514d](https://github.com/Molunerfinn/PicGo/commit/f75514d)), closes [#731](https://github.com/Molunerfinn/PicGo/issues/731)
+* add showDockIcon option ([46f54e1](https://github.com/Molunerfinn/PicGo/commit/46f54e1)), closes [#1045](https://github.com/Molunerfinn/PicGo/issues/1045)
+* add showDockIcon option ([32eb176](https://github.com/Molunerfinn/PicGo/commit/32eb176)), closes [#1045](https://github.com/Molunerfinn/PicGo/issues/1045)
+* support dragging any type of file to upload ([520d6d3](https://github.com/Molunerfinn/PicGo/commit/520d6d3)), closes [#1052](https://github.com/Molunerfinn/PicGo/issues/1052)
+
+
+### :bug: Bug Fixes
+
+* console.log EPIPE error ([7363be7](https://github.com/Molunerfinn/PicGo/commit/7363be7)), closes [#1101](https://github.com/Molunerfinn/PicGo/issues/1101)
+* custom url template encode bug ([063962d](https://github.com/Molunerfinn/PicGo/commit/063962d)), closes [#1112](https://github.com/Molunerfinn/PicGo/issues/1112)
+* fix copy link encoding bug ([34657ae](https://github.com/Molunerfinn/PicGo/commit/34657ae)), closes [#731](https://github.com/Molunerfinn/PicGo/issues/731)
+* i18n bug ([911e34e](https://github.com/Molunerfinn/PicGo/commit/911e34e))
+* isDarkMode() error when dragging file to tray icon ([b7d2edb](https://github.com/Molunerfinn/PicGo/commit/b7d2edb)), closes [#1107](https://github.com/Molunerfinn/PicGo/issues/1107)
+* typescript nightly build bug ([455cb49](https://github.com/Molunerfinn/PicGo/commit/455cb49)), closes [#1082](https://github.com/Molunerfinn/PicGo/issues/1082)
+
+
+### :package: Chore
+
+* change version files' upload dest & dist files' upload dest ([4f392f3](https://github.com/Molunerfinn/PicGo/commit/4f392f3))
+
+
+### :pencil: Documentation
+
+* update FAQ ([6801334](https://github.com/Molunerfinn/PicGo/commit/6801334)), closes [#1067](https://github.com/Molunerfinn/PicGo/issues/1067)
+
+
+
 # :tada: 2.4.0-beta.0 (2023-01-05)
 
 
@@ -574,6 +701,3 @@
 ### :package: Chore
 
 * add picgo bump-version ([37f1d34](https://github.com/Molunerfinn/PicGo/commit/37f1d34))
-
-
-

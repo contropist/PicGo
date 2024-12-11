@@ -1,11 +1,11 @@
 interface ISettingForm {
-  updateHelper: boolean
+  showUpdateTip: boolean
   showPicBedList: string[]
   autoStart: boolean
   rename: boolean
   autoRename: boolean
   uploadNotification: boolean
-  miniWindowOntop: boolean
+  miniWindowOnTop: boolean
   logLevel: string[]
   autoCopyUrl: boolean
   checkBetaUpdate: boolean
@@ -13,6 +13,16 @@ interface ISettingForm {
   language: string
   logFileSizeLimit: number
   encodeOutputURL: boolean
+  showDockIcon: boolean
+  customLink: string
+  npmProxy: string
+  npmRegistry: string
+  server: {
+    port: number
+    host: string
+    enable: boolean
+  }
+  startupMode: import('#/types/enum').IStartupMode
 }
 
 interface IShortKeyMap {
@@ -31,4 +41,8 @@ interface IToolboxItem {
 
 type IToolboxMap = {
   [id in import('#/types/enum').IToolboxItemType]: IToolboxItem
+}
+
+interface IFormInstance {
+  validate: () => Promise<IStringKeyMap | false>
 }

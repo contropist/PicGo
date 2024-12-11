@@ -1,5 +1,8 @@
 <template>
-  <div id="config-list-view">
+  <div
+    id="config-list-view"
+    class="h-[425px]"
+  >
     <div class="view-title">
       {{ $T('SETTINGS') }}
     </div>
@@ -193,7 +196,7 @@ export default {
     flex-wrap wrap
     width: 98%
     .config-item
-      height 85px
+      height 100px
       margin-bottom 20px
       border-radius 4px
       cursor pointer
@@ -239,9 +242,10 @@ export default {
     .selected
       border 1px solid #409EFF
   .set-default-container
-    position absolute
-    bottom 10px
+    position fixed
+    bottom 20px
     width 100%
     .set-default-btn
       width 250px
+      transform translateX(-50%)
 </style>

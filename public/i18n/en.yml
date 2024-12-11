@@ -1,4 +1,4 @@
-LANG_DISPLAY_LABEL: 'English'
+LANG_DISPLAY_LABEL: "English"
 ABOUT: About
 OPEN_MAIN_WINDOW: Open Main Window
 CHOOSE_DEFAULT_PICBED: Choose Default Picbed
@@ -28,7 +28,7 @@ OPEN_TOOLBOX: Open Toolbox
 
 # ---renderer i18n begin---
 
-CHOOSE_YOUR_DEFAULT_PICBED: 'Choose ${d} as your default picbed:'
+CHOOSE_YOUR_DEFAULT_PICBED: "Choose ${d} as your default picbed:"
 UPLOAD_AREA: Upload Area
 GALLERY: Gallery
 PICBEDS_SETTINGS: Picbeds Settings
@@ -56,6 +56,8 @@ BATCH_COPY_LINK_SUCCEED: Batch Copy Link Succeed
 FILE_RENAME: File Rename
 COPY_FILE_PATH: Copy file path
 OPEN_FILE_PATH: Open file path
+SUCCESS: Success
+FAILED: Failed
 
 # settings
 
@@ -83,7 +85,7 @@ SETTINGS_AUTO_COPY_URL_AFTER_UPLOAD: Auto Copy URL After Upload
 SETTINGS_TIPS_PLACEHOLDER_URL: Use $url to represent url position
 SETTINGS_TIPS_PLACEHOLDER_FILENAME: Use $fileName to represent file name position
 SETTINGS_TIPS_PLACEHOLDER_EXTNAME: Use $extName to represent file's ext position
-SETTINGS_TIPS_SUCH_AS: 'Such as: $url/$fileName'
+SETTINGS_TIPS_SUCH_AS: "Such as: $url/$fileName"
 SETTINGS_UPLOAD_PROXY: Upload Proxy
 SETTINGS_PLUGIN_INSTALL_PROXY: Proxy for Plugin Install
 SETTINGS_PLUGIN_INSTALL_MIRROR: Mirror for Plugin Install
@@ -114,13 +116,18 @@ SETTINGS_NOT_CONFIG_OPTIONS: Not Config Options
 SETTINGS_USE_BUILTIN_CLIPBOARD_UPLOAD: Use Builtin Clipboard to Upload
 SETTINGS_CHOOSE_LANGUAGE: Choose Language
 UPLOADER_CONFIG_NAME: Configuration Name
+BUILTIN_CLIPBOARD_TIPS: Use builtin clipboard function to upload instead of using scripts
 UPLOADER_CONFIG_PLACEHOLDER: Please Enter Configuration Name
 SELECTED_SETTING_HINT: Selected
 SETTINGS_ENCODE_OUTPUT_URL: Encode Output(or Copyed) URL
+SETTINGS_SHOW_DOCK_ICON: Show Dock icon
+SETTINGS_STARTUP_MODE: Startup Mode
+SETTINGS_STARTUP_MODE_MAIN_WINDOW: Open Main Window
+SETTINGS_STARTUP_MODE_MINI_WINDOW: Open Mini Window
+SETTINGS_STARTUP_MODE_HIDE: Silent Startup
 
 # shortcut-page
 
-BUILTIN_CLIPBOARD_TIPS: Use builtin clipboard function to upload instead of using scripts
 SHORTCUT_NAME: Shortcut Name
 SHORTCUT_BIND: Shortcut Binding
 SHORTCUT_STATUS: Status
@@ -132,6 +139,13 @@ SHORTCUT_ENABLE: Enable
 SHORTCUT_DISABLE: Disable
 SHORTCUT_EDIT: Edit
 SHORTCUT_CHANGE_UPLOAD: Change Upload Shortcut
+
+# gallery-page
+CHANGE_IMAGE_URL_HOST: Change Image URL HOST
+NEW_IMAGE_URL_HOST: New Image URL HOST
+SELECTED_IMAGE_URL_HOST: Selected Image URL HOST
+CHANGE_IMAGE_URL_HOST_RESULT: The result of changing image URL HOST
+CHANGE_IMAGE_URL_HOST_WARN: You must select at least one picture first
 
 # tray-page
 
@@ -160,33 +174,6 @@ PLUGIN_INSTALLED: Installed
 PLUGIN_DOING_SOMETHING: Doing...
 PLUGIN_LIST: Plugin List
 PLUGIN_IMPORT_LOCAL: Import Local Plugins
-
-# toolbox
-TOOLBOX: Toolbox
-TOOLBOX_TITLE: Troubleshoot PicGo runtime issues  
-TOOLBOX_SUB_TITLE: Scan the following items immediately to fix usage issues
-TOOLBOX_CHECK_CONFIG_FILE_BROKEN: Check if the configuration file is damaged
-TOOLBOX_CHECK_GALLERY_FILE_BROKEN: Check if the album file is damaged 
-TOOLBOX_CHECK_PROBLEM_WITH_CLIPBOARD_PIC_UPLOAD: Check if there is a problem with clipboard picture upload
-TOOLBOX_CHECK_PROBLEM_WITH_PROXY: Check if the proxy settings are normal
-TOOLBOX_FIX_DONE_NEED_RELOAD: Repair completed, need to restart to take effect, restart or not
-TOOLBOX_CANT_AUTO_FIX: Unable to automatically repair, please repair the following problems yourself
-TOOLBOX_START_SCAN: Start scanning
-TOOLBOX_RE_SCAN: Re scanning
-TOOLBOX_START_FIX: Start fixing
-TOOLBOX_SUCCESS_TIPS: Congratulations, no problems were found
-TOOLBOX_CHECK_CONFIG_FILE_PATH_TIPS: "The configuration file path is: ${path}"
-TOOLBOX_CHECK_CONFIG_FILE_BROKEN_TIPS: The configuration file is damaged
-TOOLBOX_CHECK_GALLERY_FILE_PATH_TIPS: "The album file path is: ${path}"
-TOOLBOX_CHECK_GALLERY_FILE_BROKEN_TIPS: The album file is damaged
-TOOLBOX_CHECK_PROXY_SUCCESS_TIPS: Proxy settings normal
-TOOLBOX_CHECK_PROXY_NO_PROXY_TIPS: No proxy settings
-TOOLBOX_CHECK_PROXY_PROXY_IS_NOT_CORRECT: Proxy settings incorrect
-TOOLBOX_CHECK_PROXY_PROXY_IS_NOT_WORKING: Proxy settings unavailable
-TOOLBOX_CHECK_CLIPBOARD_FILE_PATH_TIPS: "The temporary folder path for clipboard pictures is: ${path}"
-TOOLBOX_CHECK_CLIPBOARD_FILE_PATH_NOT_EXIST_TIPS: "The temporary folder for clipboard pictures does not exist: ${path}"
-TOOLBOX_CHECK_CLIPBOARD_FILE_PATH_ERROR_TIPS: "Please create the folder yourself: ${path}"
-
 
 # tips
 
@@ -217,6 +204,32 @@ DISABLE_PLUGIN: Disable Plugin
 UNINSTALL_PLUGIN: Uninstall Plugin
 UPDATE_PLUGIN: Update Plugin
 
+# toolbox
+TOOLBOX: Toolbox
+TOOLBOX_TITLE: Troubleshoot PicGo runtime issues
+TOOLBOX_SUB_TITLE: Scan the following items immediately to fix usage issues
+TOOLBOX_CHECK_CONFIG_FILE_BROKEN: Check if the configuration file is damaged
+TOOLBOX_CHECK_GALLERY_FILE_BROKEN: Check if the album file is damaged
+TOOLBOX_CHECK_PROBLEM_WITH_CLIPBOARD_PIC_UPLOAD: Check if there is a problem with clipboard picture upload
+TOOLBOX_CHECK_PROBLEM_WITH_PROXY: Check if the proxy settings are normal
+TOOLBOX_FIX_DONE_NEED_RELOAD: Repair completed, need to restart to take effect, restart or not
+TOOLBOX_CANT_AUTO_FIX: Unable to automatically repair, please repair the following problems yourself
+TOOLBOX_START_SCAN: Start scanning
+TOOLBOX_RE_SCAN: Re scanning
+TOOLBOX_START_FIX: Start fixing
+TOOLBOX_SUCCESS_TIPS: Congratulations, no problems were found
+TOOLBOX_CHECK_CONFIG_FILE_PATH_TIPS: "The configuration file path is: ${path}"
+TOOLBOX_CHECK_CONFIG_FILE_BROKEN_TIPS: The configuration file is damaged
+TOOLBOX_CHECK_GALLERY_FILE_PATH_TIPS: "The album file path is: ${path}"
+TOOLBOX_CHECK_GALLERY_FILE_BROKEN_TIPS: The album file is damaged
+TOOLBOX_CHECK_PROXY_SUCCESS_TIPS: Proxy settings normal
+TOOLBOX_CHECK_PROXY_NO_PROXY_TIPS: No proxy settings
+TOOLBOX_CHECK_PROXY_PROXY_IS_NOT_CORRECT: Proxy settings incorrect
+TOOLBOX_CHECK_PROXY_PROXY_IS_NOT_WORKING: Proxy settings unavailable
+TOOLBOX_CHECK_CLIPBOARD_FILE_PATH_TIPS: "The temporary folder path for clipboard pictures is: ${path}"
+TOOLBOX_CHECK_CLIPBOARD_FILE_PATH_NOT_EXIST_TIPS: "The temporary folder for clipboard pictures does not exist: ${path}"
+TOOLBOX_CHECK_CLIPBOARD_FILE_PATH_ERROR_TIPS: "Please create the folder yourself: ${path}"
+
 # tips
 TIPS_NOTICE: Tips
 TIPS_WARNING: Warning
@@ -227,7 +240,7 @@ TIPS_PLUGIN_OVERWRITE_GALLERY: Plugin is trying to overwrite the album gallery, 
 TIPS_UPLOAD_NOT_PICTURES: The latest clipboard item is not a picture
 TIPS_PICGO_CONFIG_FILE_BROKEN_WITH_DEFAULT: PicGo config file broken, has been restored to default
 TIPS_PICGO_CONFIG_FILE_BROKEN_WITH_BACKUP: PicGo config file broken, has been restored to backup
-TIPS_PICGO_BACKUP_FILE_VERSION: 'Backup file version: ${v}'
+TIPS_PICGO_BACKUP_FILE_VERSION: "Backup file version: ${v}"
 TIPS_CUSTOM_CONFIG_FILE_PATH_ERROR: Custom config file parse error, please check the path content
 TIPS_SHORTCUT_MODIFIED_SUCCEED: Shortcut modified successfully
 TIPS_SHORTCUT_MODIFIED_CONFLICT: Shortcut conflict, please reset

@@ -16,6 +16,29 @@ function beforeOpen () {
   resolveClipboardImageGenerator()
   resolveOtherI18nFiles()
 }
+function copyFileOutsideOfElectronAsar (
+  sourceInAsarArchive: string,
+  destOutsideAsarArchive: string
+) {
+  if (fs.existsSync(sourceInAsarArchive)) {
+    // file will be copied
+    if (fs.statSync(sourceInAsarArchive).isFile()) {
+      const file = destOutsideAsarArchive;
+      const dir = path.dirname(file)
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true })
+      }
+      fs.writeFileSync(file, fs.readFileSync(sourceInAsarArchive))
+    } else if (fs.statSync(sourceInAsarArchive).isDirectory()) {
+      fs.readdirSync(sourceInAsarArchive).forEach(function (fileOrFolderName) {
+        copyFileOutsideOfElectronAsar(
+          `${sourceInAsarArchive}/${fileOrFolderName}`,
+          `${destOutsideAsarArchive}/${fileOrFolderName}`
+        );
+      });
+    }
+  }
+}
 
 /**
  * macOS 右键菜单
@@ -26,7 +49,7 @@ function resolveMacWorkFlow () {
     return true
   } else {
     try {
-      fs.copySync(path.join(__static, 'Upload pictures with PicGo.workflow'), dest)
+      copyFileOutsideOfElectronAsar(path.join(__static, 'Upload pictures with PicGo.workflow'), dest)
     } catch (e) {
       console.log(e)
     }
@@ -88,7 +111,7 @@ function resolveOtherI18nFiles () {
   if (!fs.pathExistsSync(i18nFolder)) {
     fs.mkdirSync(i18nFolder)
   }
-  i18nManager.setOutterI18nFolder(i18nFolder)
+  i18nManager.setOuterI18nFolder(i18nFolder)
   const i18nFiles = fs.readdirSync(path.join(CONFIG_DIR, 'i18n'), {
     withFileTypes: true
   })
